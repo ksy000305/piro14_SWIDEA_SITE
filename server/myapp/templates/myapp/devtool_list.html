@@ -1,0 +1,18 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<h1>DevTool List</h1>
+<h4>개발툴 목록 페이지입니다. 자신이 사용가능한 개발툴의 목록을 확인해보세요.</h4>
+
+<ul>
+    {% for devtool in devtools %}
+        <li>
+            <a href="{% url "myapp:devtool_detail" devtool.id%}">
+            {{ devtool.name }}
+            </a>            
+        </li>
+        <li>{{devtool.kind}}</li>
+        <li>{{devtool.desc}}</li>
+        <br/>
+    {% endfor %}
+</ul>
+{% endblock %}

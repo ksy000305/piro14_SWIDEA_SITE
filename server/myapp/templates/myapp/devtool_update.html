@@ -1,0 +1,16 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<h1> DevTool Detail Update </h1>
+<div> 개발툴 세부내용 수정 페이지 입니다. 개발툴에 대해 수정사항이 있으면 고쳐보아요. </div>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <input type="submit" value="SUBMIT">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<h1>DevTool Detail</h1>
+<h4>개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해보세요.</h4>
+<br/>
+
+<h2>{{devtool.name}}</h2>
+<br/>
+<div>{{devtool.kind}}</div>
+<div>{{devtool.desc}}</div>
+<br/>
+<div> >만들 수 있는 SW 목록 </div>
+{%for idea in devtool.idea_set.all %}
+<!-- 개발툴 디테일에서 아이디어 디테일페이지로 연결-->
+<a href="{% url "myapp:idea_detail" idea.id  %}">{{idea.title}}</a>
+{%endfor%}
+<br/>
+<br/>
+
+
+<!-- {% if idea.interest %}
+<p> 1)아이디어 관심도: {{ idea.interest }}</p> 
+{% endif %} -->
+<!-- 
+{% if idea.devtool %}
+<p> 2)예상 개발 툴: <a href="{% url 'myapp:devtool_detail' pk=idea.devtool.pk %}">{{ idea.devtool }}</a></p>
+{% endif %}
+
+{% if idea.content %}
+<p> 3)아이디어 설명: {{ idea.content }}</p>
+{% endif %} -->
+
+
+
+<form action="{% url 'myapp:devtool_delete' pk=devtool.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+</form>
+
+<button><a href="{% url "myapp:devtool_list" %}">목록</a></button>
+<button><a href="{% url "myapp:devtool_update" devtool.pk %}">수정</a></button>
+
+
+{% endblock %}

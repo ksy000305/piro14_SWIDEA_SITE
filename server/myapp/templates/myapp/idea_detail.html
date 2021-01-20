@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<h1>Idea Detail</h1>
+<h4>아이디어 세부내용 페이지입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</h4>
+<br/>
+
+
+<h2>{{ idea.title }}</h2>
+
+{% if idea.interest %}
+<p> 1)아이디어 관심도: {{ idea.interest }}</p> 
+{% endif %}
+
+{% if idea.devtool %}
+<p> 2)예상 개발 툴: <a href="{% url 'myapp:devtool_detail' pk=idea.devtool.pk %}">{{ idea.devtool }}</a></p>
+{% endif %}
+
+{% if idea.content %}
+<p> 3)아이디어 설명: {{ idea.content }}</p>
+{% endif %}
+
+{% if idea.image %}
+<img src="{{ idea.image.url }}" style="max-width: 15%"; />
+{% endif %}
+
+<form action="{% url 'myapp:idea_delete' pk=idea.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+</form>
+
+<button><a href="{% url "myapp:idea_list" %}">목록</a></button>
+<button><a href="{% url "myapp:idea_update" idea.pk %}">수정</a></button>
+
+
+{% endblock %}
